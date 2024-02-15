@@ -1,5 +1,5 @@
 # Electron_Manga_App_Test
-Tried to learn electron by coding a manga reading app.
+Tried to learn electron by coding a manga reading app. (**badly coded**)
 
 Websites i use to read manga often do not have everything available, so i will have to find different sources - this app will allow me to quickly search and read manga from the two websites i use the most. 
 
