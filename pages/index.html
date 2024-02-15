@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta 
+      http-equiv="Content-Security-Policy" 
+      content="img-src 'self' https://uploads.mangadex.org/covers/ ; default-src 'self' https://uploads.mangadex.org/covers/"
+    /> -->
+    <!-- <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    /> -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/splash.css" />
+    <link rel="stylesheet" href="css/input.css" />
+    <!-- <script src="js/renderer.js" defer></script> -->
+    <title>Manga</title>
+  </head>
+  <body>
+    <header id="titlebar"><div id="drag-region">
+      <div id="window-title">
+        <span>座 Zayomi</span>
+      </div>
+      <div id="window-controls">
+
+        <div class="button" id="min-button">
+          <img class="icon" srcset="icons/min-w-10.png 1x, icons/min-w-12.png 1.25x, icons/min-w-15.png 1.5x, icons/min-w-15.png 1.75x, icons/min-w-20.png 2x, icons/min-w-20.png 2.25x, icons/min-w-24.png 2.5x, icons/min-w-30.png 3x, icons/min-w-30.png 3.5x" draggable="false" />
+        </div>
+  
+        <div class="button" id="max-button">
+          <img class="icon" srcset="icons/max-w-10.png 1x, icons/max-w-12.png 1.25x, icons/max-w-15.png 1.5x, icons/max-w-15.png 1.75x, icons/max-w-20.png 2x, icons/max-w-20.png 2.25x, icons/max-w-24.png 2.5x, icons/max-w-30.png 3x, icons/max-w-30.png 3.5x" draggable="false" />
+        </div>
+  
+        <div class="button" id="restore-button">
+          <img class="icon" srcset="icons/restore-w-10.png 1x, icons/restore-w-12.png 1.25x, icons/restore-w-15.png 1.5x, icons/restore-w-15.png 1.75x, icons/restore-w-20.png 2x, icons/restore-w-20.png 2.25x, icons/restore-w-24.png 2.5x, icons/restore-w-30.png 3x, icons/restore-w-30.png 3.5x" draggable="false" />
+        </div>
+  
+        <div class="button" id="close-button">
+          <img class="icon" srcset="icons/close-w-10.png 1x, icons/close-w-12.png 1.25x, icons/close-w-15.png 1.5x, icons/close-w-15.png 1.75x, icons/close-w-20.png 2x, icons/close-w-20.png 2.25x, icons/close-w-24.png 2.5x, icons/close-w-30.png 3x, icons/close-w-30.png 3.5x" draggable="false" />
+        </div>
+  
+      </div> 
+    </div></header>
+    <div id = "topnavbar">
+      <div class="navselect selected" id="mangadex">Mangadex</div>
+      <div class="navselect unselected" id="manganato">Manganato</div>
+    </div>
+    <div id="main-container" class="scroll_enabled">
+      <div id="top-bar">
+        <h1 id="h1title"></h1>
+
+        <div class="form__group field">
+          <form id="searchForm" name="searchForm" action="#">
+            <input type="input" class="form__field" placeholder="search" name="search" id='searchf' maxlength="25"/>
+            <label for="searchf" class="form__label">Search...</label>
+  
+  
+          <!-- <div class="buttons"> -->
+            <button class="btn" id="search" type="submit">
+              <img src = "../assets/icons8/icons8-search.svg" class="icon2" id="searchbtn" alt="Search icon from icons8.com"/>
+            </button>
+            
+          <!-- </div> -->
+          </form>
+          <button class="btn" id="reload">
+            <img src = "../assets/icons8/icons8-refresh-60.svg" class="icon" id="relbtn" alt="Relaod icon from icons8.com"/>
+          </button>
+        </div>
+      </div>
+      <div id="manga-list">
+      </div>
+      <div class="lds-roller" id="splash"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <p id="info"></p>
+      <div id="btm-navbar">
+        <button class="nav-btn" id="nav-left"><span class="disabled-nav-arrow" id="nav-leftb">&#9665;</span></button>
+        <span id="pageNo" class="nav-text">-</span>
+        <button class="nav-btn" id="nav-right"><span class="nav-arrow" id="nav-rightb">&#9655;</span></button>
+      </div> 
+    </div>
+    <div id="second-container" class="scroll_enabled">
+
+      <div id="top-bar2">
+        <h1 id="h1title2"></h1>
+
+        <div class="form__group field">
+          <form id="searchForm2" name="searchForm" action="#">
+            <input type="input" class="form__field" placeholder="search" name="search" id='searchf2' maxlength="25"/>
+            <label for="searchf2" class="form__label">Search...</label>
+  
+  
+          
+            <button class="btn" id="search2" type="submit">
+              <img src = "../assets/icons8/icons8-search.svg" class="icon2" id="searchbtn2" alt="Search icon from icons8.com"/>
+            </button>
+            
+          
+          </form>
+          <button class="btn" id="reload2">
+            <img src = "../assets/icons8/icons8-refresh-60.svg" class="icon" id="relbtn2" alt="Relaod icon from icons8.com"/>
+          </button>
+        </div>
+      </div>
+      <div id="manga-list2">
+      </div>
+      <div class="lds-roller" id="splash2"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <p id="info2"></p>
+      <div id="btm-navbar2">
+        <button class="nav-btn" id="nav-left2"><span class="disabled-nav-arrow" id="nav-leftb2">&#9665;</span></button>
+        <span id="pageNo2" class="nav-text">-</span>
+        <button class="nav-btn" id="nav-right2"><span class="nav-arrow" id="nav-rightb2">&#9655;</span></button>
+      </div>
+    </div>
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h1 id="modal-title"></h1>
+        <div id="modal-body"> 
+          <img id="modal-img" src="">
+          <div id="modal-details">
+            <span class="detailTags">Alternative titles: </span><br>
+            <span id = "AltTitle"></span><br><br>
+            <span class="detailTags">Tags: </span><br>
+            <span id = "DTags"></span><br><br>
+            <span class="detailTags">Year: </span><br>
+            <span id = "DYear"></span><br><br>
+            <span class="detailTags">Desc: </span><br>
+            <span id = "DDesc"></span><br><br>
+          </div>
+          
+        </div>
+        <div id="modal-chapters">
+          <h2 id = "chaptercount">Chapters</h2>
+          <div>
+            <span class="disabled-header-nav" id="ChapterNavBack">&#9665;&nbsp;Prev&nbsp;&nbsp;</span>
+            <span class="ChapterNav" id="ChapterNav"></span>
+            <span class="disabled-header-nav" id="ChapterNavNext">&nbsp;&nbsp;Next&nbsp;&#9655;</span>
+          </div>
+          <!-- <div class = "chapterItem"> -->
+            <!-- <span class="data1" >Chapter 1</span>
+            <span class="data2" > dat</span> -->
+            <!-- <span class="data3" ></span> -->
+          <!-- </div>
+          <div class = "chapterItem"> -->
+            
+          </div>
+        </div>
+    </div>
+
+    <div id="manga" class="mangapopup">
+      <div class="manga-content" id="manga-content">
+        <div id="hoverarea">
+          <div class="mangaHeader" id="mangaHeader">
+            <span id="close2">&#x22B2;</span>
+            <div id="readerTitle">
+              <span class="disabled-header-nav" id="mangaHeaderNavBack">&#9665;&nbsp;Prev&nbsp;&nbsp;</span>
+              <span class="mangaHeaderNavtxt" id="mangaHeaderNavChap"></span>
+              <span class="disabled-header-nav" id="mangaHeaderNavNext">&nbsp;&nbsp;Next&nbsp;&#9655;</span>
+            </div>
+          </div>
+        </div>
+        
+        <div id="mangaImages">
+          <!-- <div id = "mangaFooter"></div> -->
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </body>
+  <script src="./js/renderer.js"></script>
+</html>

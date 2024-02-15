@@ -1,0 +1,736 @@
+/* title bar credit: https://github.com/binaryfunt/electron-seamless-titlebar-tutorial */
+#main-container, #second-container{
+    /* background: #151520; */
+    height: calc(100% - 32px);
+    margin: 0;
+    /* margin-top: 32px; */
+    padding: 20px;
+    overflow-y: auto;
+}
+#titlebar {
+    display: block;
+    position: fixed;
+    height: 32px;
+    width: calc(100% - 2px); /*Compensate for body 1px border*/
+    background: #252530;
+    color:#FFF;
+}
+
+#titlebar #drag-region {
+    width: 100%;
+    height: 100%;
+    -webkit-app-region: drag;
+    display: grid;
+    grid-template-columns: auto 138px;
+
+    #window-controls {
+        display: grid;
+        grid-template-columns: repeat(3, 46px);
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+    }
+    
+    #window-controls .button {
+        grid-row: 1 / span 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+    #min-button {
+        grid-column: 1;
+    }
+    #max-button, #restore-button {
+        grid-column: 2;
+    }
+    #close-button {
+        grid-column: 3;
+    }
+}
+
+* {
+    font-family: Helvetica;
+    color: aliceblue;
+}
+
+body,html {
+    border: 1px solid #48545c;
+    overflow-y: hidden;
+    margin: 0;
+    height:100%
+  }
+
+@media (-webkit-device-pixel-ratio: 1.5), (device-pixel-ratio: 1.5),
+(-webkit-device-pixel-ratio: 2), (device-pixel-ratio: 2),
+(-webkit-device-pixel-ratio: 3), (device-pixel-ratio: 3) {
+  #window-controls .icon {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+#window-controls {
+    -webkit-app-region: no-drag;
+}
+
+#window-controls .button {
+    user-select: none;
+}
+#window-controls .button:hover {
+    background: rgba(255,255,255,0.1);
+}
+#window-controls .button:active {
+    background: rgba(255,255,255,0.2);  
+}
+
+#close-button:hover {
+    background: #E81123 !important;
+}
+#close-button:active {
+    background: #F1707A !important;
+}
+#close-button:active .icon {
+    filter: invert(1);
+}
+
+#restore-button {
+    display: none !important;
+}
+
+#window-title {
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+    overflow: hidden;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 15px;
+    color:gray;
+    font-weight: bold;
+    padding-left: 5px;
+}
+  
+#window-title span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1.5;
+    color:darkgray
+}
+.maximized #titlebar {
+    width: 100%;
+    padding: 0;
+}
+  
+.maximized #window-title {
+    margin-left: 12px;
+}
+  
+.maximized #restore-button {
+    display: flex !important;
+}
+  
+.maximized #max-button {
+    display: none;
+}
+
+#top-bar .form__group, #top-bar2 .form__group{
+    /* display:inline-block; */
+    /* position: absolute; */
+    float: right;
+    right: 80px;
+    align-items: center;
+    justify-content: center;
+}
+
+#top-bar h1,  #top-bar2 h1 {
+    color:#dff4ff;
+    float: left;
+    padding-left: 30px;
+    font-size: 30px;
+    /* display:inline-block */
+}
+
+.card {
+    display: inline-block;
+    margin-right: 50px;
+    width: 200px;
+    height: 300px;
+    /* width: 10vw;
+    height: calc(1.5 * var(--width)); */
+    align-items: center;
+    margin-top: 0%;
+    animation: fadeIn 0.3s ease-in-out;
+    
+}
+.card:hover {
+    transform: translate3D(0,-1px,0) scale(1.03); /* move up slightly and zoom in */
+    box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
+    transition: all .4s ease; /* zoom in */
+    cursor: pointer;
+  }
+
+.card:not(:hover) {
+    transform: translate3D(0, 0, 0) scale(1); /* Return to original state */
+    transition: all .4s ease; /* zoom in */
+    cursor: pointer;
+    /* You can define other styles if needed */
+}
+
+.card span{
+    color:azure;
+    /* width: 100%; */
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.cardTitle{
+    height: 50px;
+    font-size: 1.2em;
+}
+
+.card img{
+    width: 200px;
+    height: 300px;
+    border-radius: 25px;
+    object-fit: cover;
+    /* display: block; */
+    /* height: calc(1.5 * var(--width)); */
+    /* white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center; */
+}
+
+/* .innerinnerDiv{
+    height:5%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #dff4ff;
+} */
+/*  */
+#manga-list, #manga-list2{
+    min-width: 1000px;
+    text-align: center;
+    margin-top: 20px;
+    margin-left:20px;
+
+}
+
+#top-bar, #top-bar2{
+    height:80px;
+}
+
+/* modal code */
+
+.modal { 
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: calc(100% - 2px);
+    height: calc(100% - 32px);
+    margin-left: 2px;
+    margin-top: 32px;
+    /* height: 100%;  */
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.56); 
+    /* transition: opacity 1s ease-in-out; */
+    animation: fadeIn 0.2s ease-in-out;
+    
+}
+
+
+/* The Close Button */
+.close {
+    color:rgba(255,255,255,0.1);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: rgba(255,255,255,0.2); 
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+from {
+    opacity: 0;
+}
+to {
+    opacity: 1;
+}
+}
+
+
+#modal-body,#modal-title{
+    width: 100%;
+}
+
+#modal-img{
+    width:300px;
+    float: left;
+    margin-right:20px;
+}
+#modal-details{
+    display: inline;
+}
+
+.ratingTag{
+    float: left;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1000;
+    background-color: #442052;
+    padding: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    width: 60%;
+    height: 20px;
+    font-size: 15px;
+    border-radius: 24px 0 5px 0px;
+}
+.ratingTagE{
+    float: left;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1000;
+    background-color: #660c18;
+    padding: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    width: 40%;
+    height: 20px;
+    font-size: 15px;
+    border-radius: 24px 0 5px 0px;
+}
+
+.detailTags{
+    color: #8ef7ff;
+    font-size: 25px;
+    font-weight: bold;
+}
+#modal-title{
+    /* border-width: 0 0 3px 0;
+    border-image-slice: 1;
+    border-image: linear-gradient(to right, #7c78c7,#8ef7ff);
+    width: 100%; */
+    background-image: linear-gradient(to right, #918dda, #8ef7ff);
+  background-clip: text;
+  -webkit-background-clip: text; /* For Safari/Chrome */
+  color: transparent;
+  border-bottom: 3px solid transparent;
+  width: 100%;
+}
+
+#modal-chapters{
+    display:block;
+    margin-top: 35px;
+    margin-bottom: 50px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+#modal-chapters h2{
+    color:#8ef7ff
+}
+
+#modal-body{
+    display: flow-root;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #252530;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #a0a0a0;
+    margin-top: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: 60%;
+    height: 80%;
+    max-height: 70%; /* Set a maximum height for the modal content */
+    overflow-y: auto;
+    border-radius: 5px;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 20px;
+}
+.modal-content::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,0);
+}
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: #2d2c4b;
+    border-radius: 6px;
+    border: 4px solid rgba(0,0,0,0);
+    background-clip: content-box;
+    min-width: 32px;
+    min-height: 32px;
+}
+.modal-content::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0);
+}
+
+.scroll_enabled {
+    overflow: scroll;
+    height: 1000px; /* define your custom height */
+}
+
+.scroll_enabled::-webkit-scrollbar {
+    width: 20px;
+}
+.scroll_enabled::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,0);
+}
+.scroll_enabled::-webkit-scrollbar-thumb {
+    background-color: #2d2c4b;
+    border-radius: 6px;
+    border: 4px solid rgba(0,0,0,0);
+    background-clip: content-box;
+    min-width: 32px;
+    min-height: 32px;
+}
+.scroll_enabled::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0);
+}
+
+table{
+    width: 100%;
+    border:5px;
+}
+
+th{
+    border-top: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.data1{
+    width:50%;
+    padding: 10px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    padding-left: 20px;
+}
+.data2{
+    width:50%;
+    text-align: right;
+    padding: 10px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 30px;
+}
+.chapterItem{
+    width: 100%;
+    height: 60px;
+    display: inline-block;
+    border-bottom: 1px solid;
+    border-color: #aba8eb;
+    display: flex;
+    justify-content: space-between;
+    transition: background-color 0.5s linear;
+    
+}
+
+.chapterItem:hover {
+    background-color: #333342;
+    
+    cursor: pointer;
+}
+
+#DDesc{
+    width:50%;
+}
+#readMoreButton{
+    cursor: pointer;
+    color: #64999e;
+}
+#readMoreButton:hover{
+    cursor: pointer;
+    color: #2f4749;
+}
+#moreTitles{
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mangapopup { 
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: calc(100% - 2px);
+    height: calc(100% - 32px);
+    margin-top: 32px;
+    margin-left: 2px;
+    overflow: auto; 
+    /* background-color: rgba(0,0,0,0.56);  */
+    /* transition: opacity 1s ease-in-out; */
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+/* #252530; */
+
+/* Modal Content */
+.manga-content {
+    background-color: #151520;
+    margin: auto;
+    /* padding: 20px;
+    border: 1px solid #000;
+    margin-top: 30px;
+    padding-left: 40px;
+    padding-right: 40px; */
+    width: calc(100% - 2px);
+    height: 3000px;
+    /* margin-top: 32px; */
+    /* max-height: 70%; */
+    overflow-y: auto;
+    border-radius: 5px;
+    text-align: center;
+    max-height: 100%;
+    overflow: auto;
+    
+}
+
+.manga-content::-webkit-scrollbar {
+    width: 20px;
+}
+.manga-content::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,0);
+}
+.manga-content::-webkit-scrollbar-thumb {
+    background-color: #2d2c4b;
+    border-radius: 6px;
+    border: 4px solid rgba(0,0,0,0);
+    background-clip: content-box;
+    min-width: 32px;
+    min-height: 32px;
+}
+.manga-content::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0);
+    margin-top: 40px;
+}
+
+#close2 {
+    color:#b1dbdd;
+    /* float: right; */
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 25%;
+    text-align: left;
+    
+}
+
+
+
+#close2:hover,
+#close2:focus {
+    /* #92b7b983; */
+    color: #97c3c5;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.mangaHeader{
+    width:100%;
+    height:40px;
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    background-color: #1c1c24d8;
+    border-radius: 1px;
+    /* 252530 */
+    opacity: 0; 
+    /* opacity: 1;  */
+    transition: opacity 0.3s ease;
+}
+ 
+#hoverarea:hover .mangaHeader,.mangaHeader:hover{
+    opacity: 1; /* Change opacity to 1 on hover to reveal the element */
+  }
+
+#hoverarea{
+    position: fixed;
+    /* opacity: 0; */
+    width: 98%;
+    /* height: 300px; */
+    height: 100%;
+}
+
+#readerTitle{
+    margin-right: 10px;
+    margin-top: 10px;
+    white-space: nowrap;
+    width: 25%;
+}
+
+.mangaHeaderNav, .mangaHeaderNavtxt{
+    color:#9d99e2;
+    font-size: 18px;
+    font-weight: bold;
+}
+.mangaHeaderNavtxt{
+    color:#dfdefac5;
+}
+
+.mangaHeaderNav:hover{
+    color:#7e7caac5;
+    cursor: pointer;
+}
+
+.disabled-header-nav{
+    color:#9294b988;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.mangapage{
+    max-width: 80%;
+    
+}
+
+#chapterCountDiv{
+    display: flex;
+    justify-content: space-between;
+}
+
+#chapterNav{
+    display: flex;
+    align-items: center;
+}
+
+.enabled-header-nav{
+    color:#ffffff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.enabled-header-nav:hover{
+    color:#ffffff91;
+    cursor: pointer;
+}
+
+#mangaFooter{
+    height: 250px;
+    background: linear-gradient(to bottom, #151520, #0b0b11);
+}
+
+.chapFooterArrow{
+    font-size: 28px;
+    color: rgba(255, 255, 255, 0.733);
+    font-weight: bold;
+}
+
+#mangaImages{
+    height: 120%;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+#mangaImages img{
+    width: 70%; /* Make the image take the full width of the container */
+    height: auto;
+}
+
+#topnavbar{
+    width: 100%;
+    /* background-color: red; */
+    background: #252530;
+    margin-top: 32px;
+    /* padding-top: 2px; */
+    display: flex;
+    position:relative;
+  }
+/*   
+.navselect{
+    text-align: center;
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 50%;
+    display: inline-block;
+  }
+#navselected{
+    border: 0.5px solid #aaa;
+    border-bottom: 0px solid;
+    background: #151520;
+  }
+#navunselected{
+border-bottom: 0.5px solid #aaa;;
+} */
+
+.navselect {
+    text-align: center;
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 50%;
+    display: inline-block;
+    /* Add border-radius for top corners */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* border: 0.5px solid #aaa; */
+    border-bottom: 1px solid #252530;
+    /* 252530 */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+  /* Style the selected tab */
+.selected {
+background-color: #151520;
+cursor: default;
+/* border-bottom: 0.5px solid #aaa; */
+}
+.unselected {
+    cursor: pointer;
+    /* border-bottom: 0.5px solid #aaa; */
+}
+
+.unselected:hover {
+    background-color: #f9ffff09; /* Change the background color to a highlighter color */
+  }

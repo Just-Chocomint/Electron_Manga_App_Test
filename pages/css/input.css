@@ -1,0 +1,150 @@
+/* $primary: #11998e;
+$secondary: #38ef7d;
+$white: #fff;
+$gray: #9b9b9b; */
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 35%;
+  padding-left: 70px;
+
+/* display: inline-block; */
+
+}
+
+.form__field {
+  font-family: inherit;
+  width: 70%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1.3rem;
+  color: white;
+  /* padding: 7px 0; */
+  /* prog stop here */
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #8ef7ff;
+    font-weight:700;    
+  }
+  /* padding-bottom: 6px;   */
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #7c78c7,#8ef7ff);
+  border-image-slice: 1;
+}
+/* reset input */
+.form__field{
+  &:required,&:invalid { box-shadow:none; }
+}
+/* demo */
+.nav-arrow{
+  font-weight: bolder;
+  font-size: 2.5em;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  transition: all 0.2s ease-in-out;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  
+  padding-bottom: 6px;
+  /* padding-right: 4px; */
+}
+
+.disabled-nav-arrow{
+  font-weight: bolder;
+  font-size: 2.5em;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  transition: all 0.2s ease-in-out;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  color:#333;
+  
+  padding-bottom: 6px;
+  /* padding-right: 4px; */
+}
+
+#nav-leftb{
+  padding-right: 4px;
+}
+#nav-rightb{
+  padding-left: 4px;
+}
+
+.nav-arrow:hover{
+  /* transform: scale(1.5); */
+  /* padding: 1px; */
+  border-radius: 100%;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.nav-arrow:active{
+  /* transform: scale(1.5); */
+  /* padding: 1px; */
+  /* border-radius: 200%; */
+  background-color: rgba(255,255,255,0.2);
+}
+
+.nav-text{
+  color:#dff4ff;
+  font-size: 1.5em;
+  padding-left:30px;
+  padding-right: 30px;
+}
+
+.nav-btn{
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.nav-text{
+  display: inline-block;
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+}
+
+#btm-navbar, #btm-navbar2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 100px;
+  visibility:hidden;
+}
+
+form {
+  display: inline;
+}
+

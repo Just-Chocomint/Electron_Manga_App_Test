@@ -1,0 +1,20 @@
+{
+  "name": "mapp",
+  "version": "1.0.0",
+  "description": "Manga app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Moh Ze Le",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^24.3.1"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cheerio": "^1.0.0-rc.12",
+    "puppeteer": "^21.1.1"
+  }
+}
