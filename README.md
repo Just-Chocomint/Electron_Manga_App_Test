@@ -14,13 +14,19 @@ I get manga from Mangadex (API) and Manganato (Webscraping - puppeteer, cheerio)
 
 ## **Video examples:**
 Ability to choose source
+
 https://github.com/Just-Chocomint/Electron_Manga_App_Test/assets/58057821/631b5fb0-5549-46ab-8bcd-1cfc836a35ee
 
+
 Searching and reading from Mangadex + scrolling to next chapter
+
 https://github.com/Just-Chocomint/Electron_Manga_App_Test/assets/58057821/c3ab1cd2-4b7b-44f8-a355-4ab5173df9e2
 
+
 Searching and reading from Manganato
+
 https://github.com/Just-Chocomint/Electron_Manga_App_Test/assets/58057821/d188716b-5d71-4535-9ece-2ef304d08a73
+
 
 
 ## **Yet to implement:**
